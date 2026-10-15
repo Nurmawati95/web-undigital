@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UNDIGITAL - Preview Publikasi Undangan Digital</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              300: '#7dd3fc',
+              500: '#29b6f6',
+              600: '#0284c7',
+              700: '#0369a1',
+            },
+            champagne: {
+              50: '#fdfbf7',
+              100: '#f7f2e7',
+              200: '#eee3cd',
+              300: '#e1cea7',
+              700: '#8c6b32',
+              800: '#634b23',
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'serif'],
+            script: ['Alex Brush', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom Scrollbar for phone preview */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+    .glass-dark {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .arch-frame {
+      border-radius: 9999px 9999px 1.5rem 1.5rem;
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 9s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#0f172a] text-slate-800 font-sans antialiased min-h-screen relative overflow-x-hidden selection:bg-brand-500 selection:text-white">
+<!-- Background Blur Canvas Ambience -->
+<div class="fixed inset-0 pointer-events-none z-0 opacity-40">
+<div class="absolute -top-32 -left-32 w-96 h-96 bg-brand-500/30 rounded-full blur-3xl"></div>
+<div class="absolute top-1/2 -right-32 w-96 h-96 bg-amber-200/25 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl"></div>
+<img alt="Background Texture" class="w-full h-full object-cover filter blur-2xl scale-110 opacity-30" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Top Studio Bar / Context Header -->
+<header class="relative z-20 border-b border-white/10 bg-slate-900/80 backdrop-blur-md px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-cyan-300 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+<i class="w-5 h-5" data-lucide="mail-heart"></i>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-white font-bold tracking-wide text-base">UNDIGITAL</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-semibold border border-emerald-500/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Guest View Mode
+          </span>
+</div>
+<p class="text-xs text-slate-400">Pratinjau Undangan: <span class="text-slate-200 font-medium">The Wedding of Putra &amp; Putri</span> (Slug: /the-wedding-of-putra-putri)</p>
+</div>
+</div>
+<!-- Mode Badge & Quick Controls -->
+<div class="flex items-center gap-3">
+<div class="hidden md:flex items-center bg-slate-800/90 rounded-xl p-1 border border-white/10 text-xs font-medium text-slate-300">
+<span class="px-3 py-1.5 rounded-lg bg-brand-500 text-white font-semibold shadow-sm flex items-center gap-1.5">
+<i class="w-3.5 h-3.5" data-lucide="smartphone"></i> Dual Mobile View (9:16)
+        </span>
+<span class="px-3 py-1.5 rounded-lg hover:text-white transition flex items-center gap-1.5 cursor-pointer">
+<i class="w-3.5 h-3.5" data-lucide="share-2"></i> Salin Tautan Tamu
+        </span>
+</div>
+<a class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition border border-white/15 flex items-center gap-1.5" href="#">
+<i class="w-3.5 h-3.5 text-brand-300" data-lucide="external-link"></i> Buka Full Web
+      </a>
+</div>
+</header>
+<!-- Main Presentation Container (Side-by-side Dual Smartphone Comparison) -->
+<main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
+<!-- Title Info Banner -->
+<div class="text-center max-w-2xl mx-auto mb-10 text-white">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-300 text-xs font-semibold uppercase tracking-widest mb-3">
+<i class="w-3.5 h-3.5" data-lucide="sparkles"></i> Client &amp; Guest Experience Preview
+      </span>
+<h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">
+        Simulasi 2 Kondisi Layar Undangan Digital
+      </h1>
+<p class="mt-2 text-sm text-slate-300">
+        Sisi kiri menampilkan <span class="text-white font-semibold">Sampul Depan (Cover Lock)</span> saat link baru dibuka, dan sisi kanan adalah <span class="text-white font-semibold">Isi Undangan Lengkap</span> setelah tombol "Buka Undangan" ditekan.
+      </p>
+</div>
+<!-- Phone Mockups Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start justify-center">
+<!-- ========================================== -->
+<!-- SCREEN 1: SAMPUL DEPAN (LOCKED OVERLAY)   -->
+<!-- ========================================== -->
+<div class="flex flex-col items-center">
+<!-- Label State Header -->
+<div class="w-full max-w-[400px] mb-3 flex items-center justify-between text-xs text-slate-300 px-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+<span class="font-bold text-white uppercase tracking-wider text-[11px]">Layar 1: Sampul Depan</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-medium text-[11px] border border-amber-500/30">
+            Locked Full-Screen (100dvh)
+          </span>
+</div>
+<!-- Smartphone Frame 1 -->
+<div class="w-full max-w-[390px] h-[780px] bg-slate-900 rounded-[44px] p-3 shadow-2xl shadow-black/80 ring-1 ring-white/20 relative overflow-hidden flex flex-col">
+<!-- Speaker & Camera Dynamic Island / Notch -->
+<div class="absolute top-5 left-1/2 -translate-x-1/2 w-32 h-5 bg-black rounded-full z-40 flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-slate-950 border border-slate-800 mr-3"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-blue-950/60 border border-slate-800"></div>
+</div>
+<!-- Inside Screen Wrapper -->
+<div class="relative w-full h-full rounded-[34px] overflow-hidden bg-slate-900 flex flex-col justify-between">
+<!-- Pre-wedding Photo Background with Smooth Gradient -->
+<div class="absolute inset-0 z-0">
+<img alt="Foto Pre-wedding Putra dan Putri" class="w-full h-full object-cover object-center filter brightness-[0.88] contrast-[1.05]" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Dark vignette & bottom overlay for text legibility -->
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-slate-950/30"></div>
+<div class="absolute inset-0 bg-radial from-transparent via-transparent to-black/40"></div>
+</div>
+<!-- Aesthetic Corner Floral / Ornaments -->
+<div class="absolute top-5 left-5 z-10 pointer-events-none opacity-80">
+<svg fill="none" height="60" stroke="#f1e2c3" stroke-width="1.2" viewbox="0 0 60 60" width="60">
+<path d="M5,5 L35,5 C40,5 45,10 45,15 C45,25 25,45 15,45 C10,45 5,40 5,35 Z" opacity="0.6"></path>
+<path d="M5,5 L5,35 C5,45 15,55 25,55" stroke-dasharray="2 3"></path>
+<circle cx="15" cy="15" fill="#f1e2c3" r="3"></circle>
+</svg>
+</div>
+<div class="absolute top-5 right-5 z-10 pointer-events-none opacity-80 scale-x-[-1]">
+<svg fill="none" height="60" stroke="#f1e2c3" stroke-width="1.2" viewbox="0 0 60 60" width="60">
+<path d="M5,5 L35,5 C40,5 45,10 45,15 C45,25 25,45 15,45 C10,45 5,40 5,35 Z" opacity="0.6"></path>
+<path d="M5,5 L5,35 C5,45 15,55 25,55" stroke-dasharray="2 3"></path>
+<circle cx="15" cy="15" fill="#f1e2c3" r="3"></circle>
+</svg>
+</div>
+<div class="absolute bottom-5 left-5 z-10 pointer-events-none opacity-80 scale-y-[-1]">
+<svg fill="none" height="60" stroke="#f1e2c3" stroke-width="1.2" viewbox="0 0 60 60" width="60">
+<path d="M5,5 L35,5 C40,5 45,10 45,15 C45,25 25,45 15,45 C10,45 5,40 5,35 Z" opacity="0.6"></path>
+<path d="M5,5 L5,35 C5,45 15,55 25,55" stroke-dasharray="2 3"></path>
+</svg>
+</div>
+<div class="absolute bottom-5 right-5 z-10 pointer-events-none opacity-80 scale-[-1]">
+<svg fill="none" height="60" stroke="#f1e2c3" stroke-width="1.2" viewbox="0 0 60 60" width="60">
+<path d="M5,5 L35,5 C40,5 45,10 45,15 C45,25 25,45 15,45 C10,45 5,40 5,35 Z" opacity="0.6"></path>
+<path d="M5,5 L5,35 C5,45 15,55 25,55" stroke-dasharray="2 3"></path>
+</svg>
+</div>
+<!-- Top Floating Music Pill (Small) -->
+<div class="relative z-20 pt-12 px-6 flex justify-between items-center">
+<span class="text-[10px] tracking-widest uppercase text-amber-200/90 font-medium bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-amber-200/20">
+                Wedding Invitation
+              </span>
+<div class="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-amber-300">
+<i class="w-4 h-4 animate-spin-slow" data-lucide="music-2"></i>
+</div>
+</div>
+<!-- Center & Bottom Content Section -->
+<div class="relative z-20 px-6 pb-8 flex flex-col items-center text-center">
+<!-- Subtitle & Couple Script Title -->
+<p class="font-serif italic text-amber-200 tracking-[0.25em] text-sm uppercase mb-1">
+                The Wedding Of
+              </p>
+<h2 class="font-script text-5xl sm:text-6xl text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] my-1 leading-tight tracking-wide">
+                Putra &amp; Putri
+              </h2>
+<p class="text-[11px] font-sans tracking-widest uppercase text-slate-300/90 mt-1 mb-5">
+                Minggu, 18 Oktober 2026 • Jakarta
+              </p>
+<!-- Glassmorphism Guest Recipient Box -->
+<div class="w-full glass-dark rounded-2xl p-4 mb-5 border border-white/20 shadow-2xl text-center backdrop-blur-xl">
+<p class="text-[11px] text-slate-300 font-sans tracking-wide">
+                  Kepada Yth. Bapak/Ibu/Saudara/i:
+                </p>
+<div class="mt-1.5 inline-block px-3 py-1 rounded-lg bg-white/10 border border-white/10">
+<h3 class="text-base font-bold text-amber-200 font-sans tracking-wide">
+                    Bapak Budi &amp; Partner
+                  </h3>
+</div>
+<p class="text-[10px] text-slate-400 mt-2 italic leading-relaxed">
+                  *Mohon maaf bila ada kesalahan penulisan nama atau gelar
+                </p>
+</div>
+<!-- Open Invitation Call-to-Action Button -->
+<button class="w-full group relative flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-gradient-to-r from-amber-200 via-amber-300 to-amber-200 text-slate-900 font-bold font-sans text-sm shadow-[0_8px_25px_rgba(251,191,36,0.35)] hover:shadow-amber-300/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer">
+<div class="w-6 h-6 rounded-full bg-slate-900/10 flex items-center justify-center">
+<i class="w-4 h-4 text-slate-900 group-hover:scale-110 transition" data-lucide="mail-open"></i>
+</div>
+<span class="tracking-wide">Buka Undangan</span>
+</button>
+<span class="text-[10px] text-slate-400 mt-3 flex items-center gap-1">
+<i class="w-3 h-3 text-emerald-400" data-lucide="shield-check"></i> Undangan Resmi Digital
+              </span>
+</div>
+<!-- Home indicator bar -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/40 rounded-full z-40"></div>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- SCREEN 2: ISI UNDANGAN UTAMA (SCROLLABLE) -->
+<!-- ========================================== -->
+<div class="flex flex-col items-center">
+<!-- Label State Header -->
+<div class="w-full max-w-[400px] mb-3 flex items-center justify-between text-xs text-slate-300 px-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
+<span class="font-bold text-white uppercase tracking-wider text-[11px]">Layar 2: Isi Undangan Utama</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 font-medium text-[11px] border border-brand-500/30">
+            Vertical Scroll (Konten Lengkap)
+          </span>
+</div>
+<!-- Smartphone Frame 2 -->
+<div class="w-full max-w-[390px] h-[780px] bg-slate-900 rounded-[44px] p-3 shadow-2xl shadow-black/80 ring-1 ring-white/20 relative overflow-hidden flex flex-col">
+<!-- Speaker & Camera Dynamic Island / Notch -->
+<div class="absolute top-5 left-1/2 -translate-x-1/2 w-32 h-5 bg-black rounded-full z-40 flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-slate-950 border border-slate-800 mr-3"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-blue-950/60 border border-slate-800"></div>
+</div>
+<!-- Inside Screen Wrapper (Scrollable area) -->
+<div class="relative w-full h-full rounded-[34px] overflow-hidden bg-champagne-50 flex flex-col no-scrollbar">
+<!-- Sticky Floating Actions on Screen (Audio & Auto Scroll) -->
+<div class="absolute top-14 right-4 z-40 flex flex-col gap-2.5">
+<!-- Audio Play Button -->
+<button class="w-9 h-9 rounded-full bg-white/90 text-slate-800 shadow-md border border-slate-200/80 flex items-center justify-center backdrop-blur hover:bg-white active:scale-95 transition" title="Play / Pause Audio">
+<i class="w-4 h-4 text-brand-600 animate-spin-slow" data-lucide="disc-3"></i>
+</button>
+<!-- Auto Scroll Button -->
+<button class="w-9 h-9 rounded-full bg-white/90 text-slate-800 shadow-md border border-slate-200/80 flex items-center justify-center backdrop-blur hover:bg-white active:scale-95 transition" title="Auto Scroll">
+<i class="w-4 h-4 text-slate-600" data-lucide="chevrons-down"></i>
+</button>
+</div>
+<!-- Scrollable Content Body -->
+<div class="overflow-y-auto h-full pb-24 no-scrollbar scroll-smooth">
+<!-- ================= SECTION 1: HERO & COUNTDOWN ================= -->
+<section class="relative min-h-[520px] flex flex-col items-center justify-between text-center px-6 pt-14 pb-8 bg-gradient-to-b from-champagne-100 via-champagne-50 to-white">
+<!-- Arch Frame Photo -->
+<div class="relative w-48 h-60 arch-frame overflow-hidden shadow-xl border-4 border-white mb-4 bg-slate-200">
+<img alt="Mempelai Putra dan Putri" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+</div>
+<div class="space-y-1">
+<p class="font-serif italic text-champagne-700 tracking-[0.2em] text-xs uppercase">
+                    Walimatul 'Ursy
+                  </p>
+<h1 class="font-script text-4xl text-slate-900 leading-tight">
+                    Putra &amp; Putri
+                  </h1>
+<p class="text-xs font-semibold text-slate-600">
+                    Minggu, 18 Oktober 2026
+                  </p>
+</div>
+<!-- 4 Countdown Boxes -->
+<div class="grid grid-cols-4 gap-2 w-full max-w-[280px] my-4">
+<div class="bg-white rounded-xl py-2 px-1 shadow-sm border border-champagne-200/80 flex flex-col items-center">
+<span class="text-base font-bold text-slate-800 font-sans leading-none">24</span>
+<span class="text-[9px] uppercase tracking-wider text-slate-400 mt-1">Hari</span>
+</div>
+<div class="bg-white rounded-xl py-2 px-1 shadow-sm border border-champagne-200/80 flex flex-col items-center">
+<span class="text-base font-bold text-slate-800 font-sans leading-none">08</span>
+<span class="text-[9px] uppercase tracking-wider text-slate-400 mt-1">Jam</span>
+</div>
+<div class="bg-white rounded-xl py-2 px-1 shadow-sm border border-champagne-200/80 flex flex-col items-center">
+<span class="text-base font-bold text-slate-800 font-sans leading-none">45</span>
+<span class="text-[9px] uppercase tracking-wider text-slate-400 mt-1">Menit</span>
+</div>
+<div class="bg-white rounded-xl py-2 px-1 shadow-sm border border-champagne-200/80 flex flex-col items-center">
+<span class="text-base font-bold text-brand-600 font-sans leading-none">12</span>
+<span class="text-[9px] uppercase tracking-wider text-slate-400 mt-1">Detik</span>
+</div>
+</div>
+<!-- Save to Calendar Button -->
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-semibold shadow hover:bg-slate-800 transition">
+<i class="w-3.5 h-3.5 text-brand-300" data-lucide="calendar-plus"></i> Simpan ke Kalender
+                </button>
+</section>
+<!-- ================= SECTION 2: PROFIL MEMPELAI ================= -->
+<section class="py-8 px-5 bg-white text-center">
+<!-- Ayat Pembuka -->
+<div class="max-w-xs mx-auto mb-8">
+<div class="w-8 h-8 mx-auto rounded-full bg-champagne-100 flex items-center justify-center text-champagne-700 mb-2">
+<i class="w-4 h-4 fill-champagne-700/20" data-lucide="heart"></i>
+</div>
+<p class="font-serif italic text-xs text-slate-600 leading-relaxed">
+                    "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."
+                  </p>
+<p class="text-[10px] font-bold text-champagne-800 mt-1.5 tracking-wider uppercase">
+                    (QS. Ar-Rum: 21)
+                  </p>
+</div>
+<!-- Mempelai Pria -->
+<div class="flex flex-col items-center mb-6">
+<div class="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-amber-300 to-champagne-200 shadow-md mb-3">
+<img alt="Putra Pratama" class="w-full h-full rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-serif text-xl font-bold text-slate-900">
+                    Putra Pratama, S.Kom
+                  </h3>
+<p class="text-xs text-slate-500 mt-0.5">
+                    Putra pertama dari Bapak Hartono &amp; Ibu Nurul
+                  </p>
+<a class="mt-2 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-pink-50 text-pink-600 text-[11px] font-medium border border-pink-100" href="#">
+<i class="w-3 h-3" data-lucide="instagram"></i> @putra.pratama
+                  </a>
+</div>
+<!-- Simbol Dan (&) -->
+<div class="my-2">
+<span class="font-script text-3xl text-champagne-700">&amp;</span>
+</div>
+<!-- Mempelai Wanita -->
+<div class="flex flex-col items-center">
+<div class="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-amber-300 to-champagne-200 shadow-md mb-3">
+<img alt="Putri Amanda" class="w-full h-full rounded-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-serif text-xl font-bold text-slate-900">
+                    Putri Amanda, S.Ds
+                  </h3>
+<p class="text-xs text-slate-500 mt-0.5">
+                    Putri kedua dari Bapak Bambang &amp; Ibu Sri Wahyuni
+                  </p>
+<a class="mt-2 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-pink-50 text-pink-600 text-[11px] font-medium border border-pink-100" href="#">
+<i class="w-3 h-3" data-lucide="instagram"></i> @putriamanda
+                  </a>
+</div>
+</section>
+<!-- ================= SECTION 3: DETAIL ACARA & MAPS ================= -->
+<section class="py-8 px-5 bg-champagne-50/70">
+<div class="text-center mb-6">
+<span class="text-[10px] uppercase tracking-widest text-champagne-700 font-bold">Waktu &amp; Tempat</span>
+<h2 class="font-serif text-2xl font-bold text-slate-900 mt-0.5">Rangkaian Acara</h2>
+<div class="w-12 h-0.5 bg-champagne-300 mx-auto mt-2"></div>
+</div>
+<!-- Kartu Akad Nikah -->
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-champagne-200/90 mb-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-champagne-100/50 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center gap-2 text-brand-600 mb-2">
+<i class="w-4 h-4" data-lucide="book-open"></i>
+<h3 class="font-serif text-lg font-bold text-slate-900">Akad Nikah</h3>
+</div>
+<div class="space-y-1.5 text-xs text-slate-600">
+<p class="flex items-center gap-2 font-medium text-slate-800">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="calendar"></i> Minggu, 18 Oktober 2026
+                    </p>
+<p class="flex items-center gap-2">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="clock"></i> 08.00 - 10.00 WIB
+                    </p>
+<p class="flex items-start gap-2 pt-1">
+<i class="w-3.5 h-3.5 text-slate-400 mt-0.5" data-lucide="map-pin"></i>
+<span>Grand Ballroom Hotel Mulia Senayan, Jakarta Pusat</span>
+</p>
+</div>
+</div>
+<!-- Kartu Resepsi -->
+<div class="bg-white rounded-2xl p-5 shadow-sm border border-champagne-200/90 mb-5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-champagne-100/50 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center gap-2 text-brand-600 mb-2">
+<i class="w-4 h-4" data-lucide="party-popper"></i>
+<h3 class="font-serif text-lg font-bold text-slate-900">Resepsi Pernikahan</h3>
+</div>
+<div class="space-y-1.5 text-xs text-slate-600">
+<p class="flex items-center gap-2 font-medium text-slate-800">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="calendar"></i> Minggu, 18 Oktober 2026
+                    </p>
+<p class="flex items-center gap-2">
+<i class="w-3.5 h-3.5 text-slate-400" data-lucide="clock"></i> 11.00 - 14.00 WIB
+                    </p>
+<p class="flex items-start gap-2 pt-1">
+<i class="w-3.5 h-3.5 text-slate-400 mt-0.5" data-lucide="map-pin"></i>
+<span>Grand Ballroom Hotel Mulia Senayan, Jakarta Pusat</span>
+</p>
+</div>
+</div>
+<!-- Peta Lokasi Preview -->
+<div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-champagne-200/90 p-3">
+<div class="relative h-36 w-full rounded-xl overflow-hidden bg-slate-100 mb-3 border border-slate-100">
+<!-- Stylized map mockup visual -->
+<img alt="Peta Lokasi Gedung" class="w-full h-full object-cover filter contrast-125" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-slate-900/10"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white p-2 rounded-full shadow-lg ring-4 ring-white animate-bounce">
+<i class="w-4 h-4" data-lucide="map-pin"></i>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition">
+<i class="w-3.5 h-3.5" data-lucide="navigation"></i> Petunjuk Lokasi (Google Maps)
+                  </button>
+</div>
+</section>
+<!-- ================= SECTION 4: GALERI & LOVE STORY ================= -->
+<section class="py-8 px-5 bg-white">
+<div class="text-center mb-6">
+<span class="text-[10px] uppercase tracking-widest text-champagne-700 font-bold">Momen Bahagia</span>
+<h2 class="font-serif text-2xl font-bold text-slate-900 mt-0.5">Galeri Foto</h2>
+<div class="w-12 h-0.5 bg-champagne-300 mx-auto mt-2"></div>
+</div>
+<!-- Kolase Foto Pre-wedding Masonry Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-8">
+<div class="space-y-2.5">
+<img alt="Prewedding 1" class="rounded-xl w-full h-40 object-cover shadow-sm" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Prewedding 2" class="rounded-xl w-full h-28 object-cover shadow-sm" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="space-y-2.5">
+<img alt="Prewedding 3" class="rounded-xl w-full h-28 object-cover shadow-sm" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Prewedding 4" class="rounded-xl w-full h-40 object-cover shadow-sm" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- Timeline Love Story Singkat -->
+<div class="border-t border-slate-100 pt-6">
+<h3 class="font-serif text-lg font-bold text-slate-800 text-center mb-4">Kisah Cinta Kami</h3>
+<div class="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-champagne-200">
+<div class="relative">
+<div class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-brand-500 border-2 border-white"></div>
+<span class="text-[10px] font-bold text-brand-600 uppercase">2020 • Pertama Bertemu</span>
+<p class="text-xs text-slate-600 mt-0.5">Pertemuan tak sengaja di perpustakaan kampus mengawali percakapan panjang kami.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-amber-400 border-2 border-white"></div>
+<span class="text-[10px] font-bold text-amber-600 uppercase">2024 • Menjalin Komitmen</span>
+<p class="text-xs text-slate-600 mt-0.5">Putra secara resmi melamar Putri di hadapan kedua keluarga besar di Bandung.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-6 top-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white"></div>
+<span class="text-[10px] font-bold text-emerald-600 uppercase">2026 • Menuju Pelaminan</span>
+<p class="text-xs text-slate-600 mt-0.5">Dengan restu Allah SWT, kami menyatukan cinta dalam ikatan suci pernikahan.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= SECTION 5: AMPLOP DIGITAL (WEDDING GIFT) ================= -->
+<section class="py-8 px-5 bg-champagne-50/70 text-center">
+<span class="text-[10px] uppercase tracking-widest text-champagne-700 font-bold">Tanda Kasih</span>
+<h2 class="font-serif text-2xl font-bold text-slate-900 mt-0.5">Amplop Digital</h2>
+<div class="w-12 h-0.5 bg-champagne-300 mx-auto mt-2 mb-3"></div>
+<p class="text-xs text-slate-600 max-w-xs mx-auto mb-6">
+                  Doa restu Anda adalah karunia terindah bagi kami. Namun jika ingin memberikan tanda kasih secara cashless:
+                </p>
+<!-- Bank Card 1: BCA -->
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-4 shadow-lg mb-3.5 text-left border border-white/10 relative overflow-hidden">
+<div class="flex justify-between items-center mb-4">
+<span class="font-bold text-sm tracking-wider text-blue-400">BCA</span>
+<i class="w-5 h-5 text-slate-400" data-lucide="credit-card"></i>
+</div>
+<p class="text-xs text-slate-400">Nomor Rekening:</p>
+<div class="flex items-center justify-between mt-1">
+<span class="text-lg font-mono font-bold tracking-widest text-amber-200">8230 1928 44</span>
+<button class="px-2.5 py-1 rounded bg-white/20 hover:bg-white/30 text-[10px] font-semibold text-white transition flex items-center gap-1">
+<i class="w-3 h-3" data-lucide="copy"></i> Salin
+                    </button>
+</div>
+<p class="text-xs text-slate-300 mt-2">a.n <span class="font-semibold text-white">Putra Pratama</span></p>
+</div>
+<!-- Bank Card 2: Mandiri / QRIS -->
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-champagne-200/90 text-left">
+<div class="flex justify-between items-center mb-3">
+<span class="font-bold text-sm text-yellow-600">Bank Mandiri</span>
+<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 font-medium">Bebas Biaya</span>
+</div>
+<p class="text-xs text-slate-400">Nomor Rekening:</p>
+<div class="flex items-center justify-between mt-1">
+<span class="text-base font-mono font-bold tracking-wider text-slate-800">1320 0293 8841</span>
+<button class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-[10px] font-semibold text-slate-700 transition flex items-center gap-1">
+<i class="w-3 h-3" data-lucide="copy"></i> Salin
+                    </button>
+</div>
+<p class="text-xs text-slate-500 mt-2">a.n <span class="font-semibold text-slate-800">Putri Amanda</span></p>
+</div>
+</section>
+<!-- ================= SECTION 6: FORM RSVP & UCAPAN ================= -->
+<section class="py-8 px-5 bg-white">
+<div class="text-center mb-6">
+<span class="text-[10px] uppercase tracking-widest text-champagne-700 font-bold">Buku Tamu</span>
+<h2 class="font-serif text-2xl font-bold text-slate-900 mt-0.5">Konfirmasi &amp; Ucapan</h2>
+<div class="w-12 h-0.5 bg-champagne-300 mx-auto mt-2"></div>
+</div>
+<!-- RSVP Form Card -->
+<div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 mb-6">
+<div class="space-y-3">
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+<input class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Masukkan nama Anda..." type="text" value="Bapak Budi &amp; Partner"/>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">Konfirmasi Kehadiran</label>
+<select class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+<option>Hadir (1 - 2 Orang)</option>
+<option>Hadir (&gt; 2 Orang)</option>
+<option>Maaf, Tidak Bisa Hadir</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-700 mb-1">Doa &amp; Ucapan Selamat</label>
+<textarea class="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Tuliskan ucapan dan doa terbaik untuk kedua mempelai..." rows="3"></textarea>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs shadow-md transition flex items-center justify-center gap-1.5">
+<i class="w-3.5 h-3.5" data-lucide="send"></i> Kirim Ucapan
+                    </button>
+</div>
+</div>
+<!-- Guest Wishes List -->
+<div class="space-y-3">
+<div class="flex items-center justify-between text-xs text-slate-500 border-b pb-2">
+<span class="font-bold text-slate-700">128 Ucapan &amp; Doa</span>
+<span class="text-[11px] text-emerald-600 font-medium">96% Konfirmasi Hadir</span>
+</div>
+<!-- Comment Item 1 -->
+<div class="p-3 bg-champagne-50/50 rounded-xl border border-champagne-200/60">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-bold text-slate-800">Dimas Pratama</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 font-medium">Hadir</span>
+</div>
+<p class="text-xs text-slate-600 leading-relaxed">
+                      "Barakallahu lakum wa baraka alaikum! Selamat ya Putra dan Putri, semoga menjadi keluarga sakinah mawaddah warahmah, langgeng sampai maut memisahkan."
+                    </p>
+<span class="text-[10px] text-slate-400 mt-1 block">10 menit yang lalu</span>
+</div>
+<!-- Comment Item 2 -->
+<div class="p-3 bg-champagne-50/50 rounded-xl border border-champagne-200/60">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-bold text-slate-800">Sarah Anggraini</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700 font-medium">Hadir</span>
+</div>
+<p class="text-xs text-slate-600 leading-relaxed">
+                      "Cantik banget Putri! Lancar-lancar ya sampai hari H. See you on Sunday!"
+                    </p>
+<span class="text-[10px] text-slate-400 mt-1 block">1 jam yang lalu</span>
+</div>
+</div>
+<!-- Footer of Invitation -->
+<div class="mt-8 pt-6 border-t border-slate-100 text-center">
+<p class="font-script text-2xl text-slate-800">Putra &amp; Putri</p>
+<p class="text-[10px] text-slate-400 mt-1">Dibuat dengan penuh cinta memakai UNDIGITAL.id</p>
+</div>
+</section>
+</div>
+<!-- ================= SECTION 7: FLOATING BOTTOM NAVIGATION BAR ================= -->
+<div class="absolute bottom-3 left-4 right-4 z-40">
+<nav class="glass-card rounded-2xl px-3 py-2 flex items-center justify-around shadow-xl border border-white/60">
+<button class="flex flex-col items-center text-brand-600 transition">
+<i class="w-4 h-4" data-lucide="home"></i>
+<span class="text-[9px] font-semibold mt-0.5">Home</span>
+</button>
+<button class="flex flex-col items-center text-slate-500 hover:text-slate-800 transition">
+<i class="w-4 h-4" data-lucide="users"></i>
+<span class="text-[9px] font-medium mt-0.5">Mempelai</span>
+</button>
+<button class="flex flex-col items-center text-slate-500 hover:text-slate-800 transition">
+<i class="w-4 h-4" data-lucide="calendar"></i>
+<span class="text-[9px] font-medium mt-0.5">Acara</span>
+</button>
+<button class="flex flex-col items-center text-slate-500 hover:text-slate-800 transition">
+<i class="w-4 h-4" data-lucide="image"></i>
+<span class="text-[9px] font-medium mt-0.5">Galeri</span>
+</button>
+<button class="flex flex-col items-center text-slate-500 hover:text-slate-800 transition">
+<i class="w-4 h-4" data-lucide="message-square-heart"></i>
+<span class="text-[9px] font-medium mt-0.5">Ucapan</span>
+</button>
+</nav>
+</div>
+<!-- Home indicator bar -->
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-900/30 rounded-full z-40 pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature Description / Guide Callout -->
+<div class="mt-12 bg-slate-900/90 border border-white/10 rounded-2xl p-6 text-white backdrop-blur-md max-w-4xl mx-auto">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<h4 class="font-bold text-sm">Respon Desktop &amp; Tablet Standar UNDIGITAL</h4>
+</div>
+<p class="text-xs text-slate-300 leading-relaxed">
+            Pada perangkat layar lebar (Laptop/Desktop), halaman publikasi ini otomatis memusatkan tampilan smartphone (max-width 480px, 100dvh) di tengah layar dengan latar belakang foto mempelai ber-efek blur elegan di sisi kanan dan kiri, menjaga pengalaman interaktif mobile-first tetap maksimal.
+          </p>
+</div>
+<div class="flex items-center gap-2 flex-shrink-0">
+<span class="text-xs px-3 py-1.5 rounded-lg bg-white/10 text-brand-300 border border-brand-500/30 font-medium">
+            Rasio 9:16 • 100dvh
+          </span>
+</div>
+</div>
+</div>
+</main>
+<script>
+    // Initialize icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
