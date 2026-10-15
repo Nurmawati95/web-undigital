@@ -1,6 +1,6 @@
 import { navSections } from '../data/dashboard.js'
 
-export default function Sidebar({ collapsed, onNavigate }) {
+export default function Sidebar({ collapsed, onNavigate, activePath = 'dashboard' }) {
   return (
     <aside
       className={`fixed left-0 top-0 z-50 flex h-full w-[260px] flex-col justify-between bg-surface-container-lowest shadow-shell transition-transform duration-300 ${
@@ -14,37 +14,38 @@ export default function Sidebar({ collapsed, onNavigate }) {
           </div>
           <span className="font-headline-sm text-headline-sm tracking-tight text-on-surface">UNDIGITAL</span>
         </div>
-
         <nav className="space-y-space-md px-space-md py-space-sm">
           {navSections.map((section) => (
             <div key={section.label} className="space-y-space-xs pt-space-xs first:pt-0">
               <p className="px-space-md py-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">
                 {section.label}
               </p>
-              {section.items.map((item) => (
-                <a
-                  key={item.path}
-                  href="#"
-                  aria-current={item.active ? 'page' : undefined}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    onNavigate?.(item)
-                  }}
-                  className={`flex items-center gap-space-sm px-space-md py-2.5 transition-all ${
-                    item.active
-                      ? 'rounded-xl bg-primary-fixed font-semibold text-on-primary-fixed'
-                      : 'rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
-                  <span className="font-label-lg text-label-lg">{item.label}</span>
-                </a>
-              ))}
+              {section.items.map((item) => {
+                const isActive = item.path === activePath
+                return (
+                  <a
+                    key={item.path}
+                    href="#"
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      onNavigate?.(item)
+                    }}
+                    className={`flex items-center gap-space-sm px-space-md py-2.5 transition-all ${
+                      isActive
+                        ? 'rounded-xl bg-primary-fixed font-semibold text-on-primary-fixed'
+                        : 'rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                    <span className="font-label-lg text-label-lg">{item.label}</span>
+                  </a>
+                )
+              })}
             </div>
           ))}
         </nav>
       </div>
-
       <div className="bg-surface-container-lowest p-space-md">
         <div className="flex items-center justify-between rounded-xl bg-surface-container-low p-space-md">
           <div className="flex items-center gap-space-sm">
