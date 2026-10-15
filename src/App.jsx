@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage.jsx'
 import LandingHeader from './components/landing/LandingHeader.jsx'
 import LandingFooter from './components/landing/LandingFooter.jsx'
 import LandingFab from './components/landing/LandingFab.jsx'
+import PreviewPage from './pages/PreviewPage.jsx'
 import { events as initialEvents } from './data/dashboard.js'
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
   }
 
   const scrollTop = () => window.scrollTo({ top: 0 })
+  const goPreview = () => { setRoute({ name: 'preview', title: 'Super-Classic' }); setSidebarOpen(false); scrollTop() }
   const goLanding = () => { setRoute({ name: 'landing', title: '' }); setSidebarOpen(false); scrollTop() }
   const goDashboard = () => { setRoute({ name: 'dashboard', title: '' }); setSidebarOpen(false); scrollTop() }
   const goFormulir = (title) => {
@@ -76,6 +78,20 @@ export default function App() {
     </div>
   ) : null
 
+  const handleLandingAction = (a) => {
+    if (typeof a === 'string' && a.startsWith('demo:')) return goPreview()
+    showToast(`Aksi katalog: ${a} (demo)…`)
+  }
+
+  if (route.name === 'preview') {
+    return (
+      <>
+        <PreviewPage onBack={goLanding} onUse={() => { showToast('Template dipilih — buka dasbor…'); goDashboard() }} notify={showToast} />
+        {toastEl}
+      </>
+    )
+  }
+
   if (route.name === 'landing') {
     return (
       <div className="bg-surface font-body-md text-body-md text-on-surface antialiased">
@@ -83,8 +99,8 @@ export default function App() {
         <main className="min-h-[calc(100vh-80px)] w-full bg-surface pt-20">
           <LandingPage
             onNavigate={handleLandingNav}
-            onOpenInvite={() => showToast('Membuka demo undangan Dimas & Sarah…')}
-            onAction={(a) => showToast(`Aksi katalog: ${a} (demo)…`)}
+            onOpenInvite={goPreview}
+            onAction={handleLandingAction}
           />
         </main>
         <LandingFooter onNavigate={handleLandingNav} />
