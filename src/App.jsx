@@ -8,6 +8,7 @@ import LandingHeader from './components/landing/LandingHeader.jsx'
 import LandingFooter from './components/landing/LandingFooter.jsx'
 import LandingFab from './components/landing/LandingFab.jsx'
 import PreviewPage from './pages/PreviewPage.jsx'
+import PublikasiPage from './pages/PublikasiPage.jsx'
 import { events as initialEvents } from './data/dashboard.js'
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
 
   const scrollTop = () => window.scrollTo({ top: 0 })
   const goPreview = () => { setRoute({ name: 'preview', title: 'Super-Classic' }); setSidebarOpen(false); scrollTop() }
+  const goPublikasi = () => { setRoute({ name: 'publikasi', title: 'The Wedding of Putra & Putri' }); setSidebarOpen(false); scrollTop() }
   const goLanding = () => { setRoute({ name: 'landing', title: '' }); setSidebarOpen(false); scrollTop() }
   const goDashboard = () => { setRoute({ name: 'dashboard', title: '' }); setSidebarOpen(false); scrollTop() }
   const goFormulir = (title) => {
@@ -56,6 +58,7 @@ export default function App() {
 
   const handleCardAction = (action, event) => {
     if (action === 'edit-form') return goFormulir(event.title)
+    if (action === 'primary' && event.status !== 'inactive') return goPublikasi()
     const labels = {
       'edit-desain': `Edit Desain: ${event.title}`,
       preview: `Preview tema: ${event.title}`,
@@ -81,6 +84,20 @@ export default function App() {
   const handleLandingAction = (a) => {
     if (typeof a === 'string' && a.startsWith('demo:')) return goPreview()
     showToast(`Aksi katalog: ${a} (demo)…`)
+  }
+
+  if (route.name === 'publikasi') {
+    return (
+      <>
+        <PublikasiPage
+          onBack={goDashboard}
+          onMaps={() => showToast('Membuka Google Maps (demo)…')}
+          onOpen={() => showToast('Membuka undangan — gulir ke isi (demo).')}
+          notify={showToast}
+        />
+        {toastEl}
+      </>
+    )
   }
 
   if (route.name === 'preview') {

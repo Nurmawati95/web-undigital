@@ -5,6 +5,22 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          300: '#7dd3fc',
+          500: '#29b6f6',
+          600: '#0284c7',
+          700: '#0369a1',
+        },
+        champagne: {
+          50: '#fdfbf7',
+          100: '#f7f2e7',
+          200: '#eee3cd',
+          300: '#e1cea7',
+          700: '#8c6b32',
+          800: '#634b23',
+        },
         'on-secondary-fixed-variant': '#005322',
         'secondary-container': '#5dfd8a',
         'on-tertiary-fixed': '#07006c',
@@ -67,6 +83,9 @@ export default {
         'margin-md': '2rem',
       },
       fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', 'serif'],
+        script: ['"Alex Brush"', 'cursive'],
         'body-md': ['"Plus Jakarta Sans"', 'sans-serif'],
         'body-sm': ['"Plus Jakarta Sans"', 'sans-serif'],
         'display-hero': ['"Plus Jakarta Sans"', 'sans-serif'],
